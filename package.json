@@ -1,0 +1,20 @@
+{
+  "name": "himstesting",
+  "version": "1.0.0",
+  "description": "This is for API Automation testing for HIMS project.",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ozone Labrada",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^12.9.0",
+    "pnpm": "^8.1.0",
+    "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8",
+    "cypress-xpath": "^2.0.1"
+  }
+}
