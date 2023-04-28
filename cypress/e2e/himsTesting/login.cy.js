@@ -1,15 +1,15 @@
 
 let userToken = '';
-let baseUrl = '';
+let baseUrl = 'https://hims-v2-re2zdhj37-wacanam.vercel.app';
 
 describe('Home to login page.', ()=>{
     it('Positive Testing!', ()=>{
-        cy.visit("https://hims-v2.vercel.app")
+        cy.visit(baseUrl)
         cy.title().should('eql','Home')
     })
 
     it('Login Testing!', ()=>{
-        cy.visit("https://hims-v2.vercel.app")
+        cy.visit(baseUrl)
         cy.get("[href='/login']").click()
         cy.title().should('eql','Home')
         cy.get("input[name='userName']").type("testjake")

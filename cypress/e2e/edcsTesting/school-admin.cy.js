@@ -13,12 +13,13 @@ describe('Home to login page.', ()=>{
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
+        cy.wait(1500)
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
-    it('Upload Promotional Report', ()=>{
+    it('Upload Promotional Report and Student Evaluation', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
@@ -33,6 +34,16 @@ describe('Home to login page.', ()=>{
         // cy.get("[data-value='2017-2018']").click()
         // cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
         cy.get('.MuiButton-textPrimary').click()
+        //Student Evaluation
+        cy.get('[data-testid="MuiDataTableBodyCell-3-1"]').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-2-3"]').click()
+        cy.get('.css-gqos7x').scrollTo('bottomRight', {duration: 1000})
+        cy.get('.MuiTableContainer-root').scrollTo('right', {duration:1000})
+        cy.get('#cancelschoolInfoDetail').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-8-0"]').click()
+        cy.get('#addDelete').click()
+        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
+        cy.wait(1500)
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
@@ -49,6 +60,11 @@ describe('Home to login page.', ()=>{
         cy.wait(1000)
         cy.get(':nth-child(1) > .MuiButtonBase-root > .MuiListItemText-root > .css-130bhjr').click()
         cy.get('#simple-tab-1').click()
+        cy.scrollTo('bottom', {duration: 2000})
+        cy.get('#simple-tab-0').click()
+        //back to dashboard
+        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
+        cy.wait(1500)
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
@@ -73,9 +89,9 @@ describe('Home to login page.', ()=>{
         // cy.get(':nth-child(2) > :nth-child(2) > .MuiChip-root > .MuiChip-label').type('last name updated')
         cy.wait(3000)
         //Logout
-        // cy.get('[aria-label="My Account"]').click()
-        // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        // cy.get('.MuiButton-outlined').click()
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
     })
 
     it('Institutional Profile', ()=>{
@@ -106,6 +122,8 @@ describe('Home to login page.', ()=>{
         cy.get('#highestEducationalAttainmentoftheHead').type('PhD')
         cy.get('#longitude').clear()
         cy.get('#longitude').type(3)
+        cy.get('#email').clear()
+        cy.get('#email').type('info@email.com.ph')
         cy.get('#municipalityCity').clear()
         cy.get('#municipalityCity').type('updated municipality')
         cy.get('#zipCode').clear()
@@ -121,6 +139,7 @@ describe('Home to login page.', ()=>{
         cy.get('.MuiButton-outlined').click()
         
     }) 
+
     it('Security Testing', ()=>{
         //login
         cy.visit(baseUrl)
@@ -133,8 +152,8 @@ describe('Home to login page.', ()=>{
         //security
         cy.get('#Security').click()
         cy.get('#changePassword').click()
-        cy.get('#email').clear()
-        cy.get('#email').type(email)
+        cy.get('.MuiDialogContent-root > :nth-child(1) > .MuiInputBase-root > #email').clear()
+        cy.get('.MuiDialogContent-root > :nth-child(1) > .MuiInputBase-root > #email').type(email)
         cy.get('#oldPassword').clear()
         cy.get('#oldPassword').type(SchoolAdminPass)
         cy.get('#newPassword').clear()
@@ -143,13 +162,14 @@ describe('Home to login page.', ()=>{
         cy.get('#confirmPassword').type('triple081')
         cy.get('.css-126xj0f > .MuiDialog-container > .MuiPaper-root > .MuiDialogActions-root > .MuiButton-contained').click()
         cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root > .MuiListItemIcon-root > .MuiButtonBase-root').click()
-        cy.wait(3000)
+        cy.wait(1500)
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
         
     })
+
     it('User Testing', ()=>{
         //login
         cy.visit(baseUrl)
@@ -161,21 +181,18 @@ describe('Home to login page.', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
         //Users
         cy.get('.MuiTabs-flexContainer > :nth-child(4)').click()
-        cy.get(':nth-child(3) > .MuiFormControl-root > .MuiInputBase-root').click()
-        //access list
-        cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > [aria-label="Access List"]').click()
-        cy.get('.css-126xj0f > .MuiDialog-container > .MuiPaper-root > .MuiDialogActions-root > .MuiButtonBase-root').click()
         //edit user info
         cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"] > [data-testid="EditRoundedIcon"] > path').click()
         cy.get('.MuiButton-contained > .MuiBox-root').click()
         cy.get('.css-126xj0f > .MuiDialog-container > .MuiPaper-elevation24 > .MuiDialogActions-root > .MuiButton-contained').click()
+        cy.wait(1500)
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
 
-    it.only('Academic Calendar Testing.', ()=>{
+    it('Academic Calendar Testing.', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
@@ -188,10 +205,11 @@ describe('Home to login page.', ()=>{
         cy.get('#AcademicCalendar').click()
         cy.get('#addAcademic').click()
         cy.get('#cancelAcademic').click()
+        cy.wait(1500)
 
         //Logout
-        // cy.get('[aria-label="My Account"]').click()
-        // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        // cy.get('.MuiButton-outlined').click()
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
     })
 })
