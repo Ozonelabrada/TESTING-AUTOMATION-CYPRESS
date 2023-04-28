@@ -1,6 +1,6 @@
 
 let userToken = '';
-let baseUrl = 'https://brave-sea-07bed7310-149.centralus.3.azurestaticapps.net';
+let baseUrl = 'https://brave-sea-07bed7310.3.azurestaticapps.net';
 let CHEDAdminName = "superadmin"
 let CHEDAdminPass = "Reversed123"
 

@@ -1,6 +1,10 @@
 
+// Username: sasa.sasa
+// Password: @&z2TVus
+
+
 let userToken = '';
-let baseUrl = 'https://brave-sea-07bed7310-152.centralus.3.azurestaticapps.net';
+let baseUrl = 'https://brave-sea-07bed7310.3.azurestaticapps.net';
 let SchoolAdminName = "ozone.SAdmin"
 let SchoolAdminPass = "triple081"
 let prName = '2023-001_FORMAT_PR_TEMPLATE_2023.xlsx'
@@ -17,9 +21,9 @@ describe('EDCS Brave Testing Environment!', ()=>{
         })
         cy.wait(1500)
         //Logout
-        cy.get('[aria-label="My Account"]').click()
-        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        cy.get('.MuiButton-outlined').click()
+        // cy.get('[aria-label="My Account"]').click()
+        // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        // cy.get('.MuiButton-outlined').click()
     })
     it('Upload Promotional Report and Student Evaluation', ()=>{
         //login
