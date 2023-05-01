@@ -217,4 +217,5 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
-})
+}) 
+//trigger
