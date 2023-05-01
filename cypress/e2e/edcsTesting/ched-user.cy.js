@@ -93,24 +93,45 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
         cy.get("[type='submit']").click()
+        // cy.wait(2000)
         //HEI
         cy.get('[style="cursor: pointer; background-color: rgb(240, 195, 1); height: 33%; margin-bottom: 10px;"] > [style="cursor: pointer; padding: 30px; flex: 1 1 0%; display: flex; flex-direction: row; align-items: center; justify-content: space-between;"]').click()
-        cy.get('.css-1wg7hcp > :nth-child(1) > .MuiListItemButton-root').click()
-        cy.wait(1000)
-        cy.get('.MuiTabs-flexContainer > :nth-child(2)').click()
-        cy.scrollTo('bottom',{duration: 500})
-        cy.wait(1000)
-        cy.get('.MuiTabs-flexContainer > :nth-child(3)').click()
-        cy.scrollTo('bottom',{duration: 500})
-        cy.wait(1000)
-        cy.get('.MuiTabs-flexContainer > :nth-child(4)').click()
-        cy.scrollTo('bottom',{duration: 500})
-        cy.wait(1000)
-
+        cy.get('form > .MuiFormControl-root > .MuiInputBase-root').type('di')//search HEI
+        // cy.wait(3000)
+        cy.get('.css-1wg7hcp > :nth-child(1) > .MuiListItemButton-root').click()//click school    
+        cy.get('.css-skb6f0 > .MuiBox-root > .MuiButtonBase-root').click()//add discipline
+        cy.get('#cancelDiscipline').click()
+        // cy.wait(1000)
+        cy.get('.MuiTabs-flexContainer > :nth-child(2)').click()//select program
+        cy.get('.css-o6ekor > .MuiBox-root > .MuiButtonBase-root').click()
+        //search dicipline
+        cy.get('#searchDiscipline').click()
+        cy.wait(2000)
+        cy.get('#searchDiscipline-option-0').click()
+        //search level
+        cy.get('#searchLevel').click()
+        cy.wait(2000)
+        cy.get('#searchLevel-option-2').click()
+        //search major
+        cy.get('#searchMajor').click()
+        cy.wait(2000)
+        cy.get('#searchMajor-option-5').click()
+        cy.get('#cancelProgram').click()
+        // cy.scrollTo('bottom',{duration: 500})
+        // cy.wait(1000)
+        cy.get('.MuiTabs-flexContainer > :nth-child(3)').click()//select curriculum
+        cy.wait(2000)
+        cy.get('.MuiTabs-flexContainer > :nth-child(4)').click()//select courses
+        cy.wait(2000)
+        cy.get('.MuiTabs-flexContainer > :nth-child(5)').click()//select downloads
+        cy.scrollTo('bottom',{duration: 1000})
+        cy.scrollTo('top',{duration: 500})
+        // cy.wait(1000)
+        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()//back to dashboard
         //Logout
-        // cy.get('[aria-label="My Account"]').click()
-        // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        // cy.get('.MuiButton-outlined').click()
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
         
     }) 
 
@@ -121,6 +142,7 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get("input[name='password']").type(ChedUserPass)
         cy.get("[type='submit']").click()
         //My profile
+        // cy.wait()
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
         //security
@@ -149,7 +171,7 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
-        cy.get("[type='submit']").click()
+        cy.get("[type='submit']").should().click()
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
