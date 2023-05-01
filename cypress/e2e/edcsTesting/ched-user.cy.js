@@ -37,6 +37,22 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
+    it('View Academic Calendar', ()=>{
+        //login
+        cy.visit(baseUrl)
+        cy.get("input[name='username']").type(ChedUserName)
+        cy.get("input[name='password']").type(ChedUserPass)
+        cy.get("[type='submit']").click().should(()=>{
+
+        })
+        cy.get(':nth-child(3) > .css-1193emu > .MuiListItemButton-root').click()
+        cy.get('.MuiFormControl-root > .MuiInputBase-root').click()
+        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
+        //Logout
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
+    })
     it('View Students', ()=>{
         //login
         cy.visit(baseUrl)
@@ -45,12 +61,8 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get("[type='submit']").click()
         //Students
         cy.get("[aria-label='Students']").click()
-        cy.wait(1000)
-        cy.get(':nth-child(1) > .MuiButtonBase-root > .MuiListItemText-root > .css-130bhjr').click()
-        cy.get('#simple-tab-1').click()
         cy.scrollTo('bottom', {duration: 2000})
-        cy.get('#simple-tab-0').click()
-        cy.get('.MuiBreadcrumbs-ol > :nth-child(1) > .MuiTypography-root').click()
+        cy.scrollTo('top', {duration: 500})
         //back to dashboard
         cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
         cy.wait(1500)
@@ -87,7 +99,7 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
     })
 
-    it.only('Institutional Profile', ()=>{
+    it('HEI Profile', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
@@ -166,56 +178,25 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         
     })
 
-    it('User Testing', ()=>{
+    it.only('User Testing', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
-        cy.get("[type='submit']").should().click()
+        cy.get('.MuiButton-contained').click()
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
         //Users
-        cy.get('.MuiTabs-flexContainer > :nth-child(4)').click()
+        cy.get('.MuiTabs-flexContainer > :nth-child(3)').click()
         //edit user info
         cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"] > [data-testid="EditRoundedIcon"] > path').click()
-        cy.get('.MuiButton-contained > .MuiBox-root').click()
+        cy.get('#editUser').click()
         cy.wait(1500)
         //Logout
-        cy.get('[aria-label="My Account"]').click()
-        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        cy.get('.MuiButton-outlined').click()
+    //     cy.get('[aria-label="My Account"]').click()
+    //     cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+    //     cy.get('.MuiButton-outlined').click()
     })
 
-    it('Academic Calendar Testing.', ()=>{
-        //login
-        cy.visit(baseUrl)
-        cy.get("input[name='username']").type(ChedUserName)
-        cy.get("input[name='password']").type(ChedUserPass)
-        cy.get("[type='submit']").click()
-        //My profile
-        cy.get('[aria-label="My Account"]').click()
-        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
-        //Academic Calendar
-        cy.get('#AcademicCalendar').click()
-        cy.get('#addAcademic').click()
-        cy.get('#StartofFirstSemester').click()
-        
-    // Click on the input field to open the date picker
-    // cy.get('#StartofFirstSemester').click();
-
-    // Select a date from the date picker
-    // cy.get('.datepicker-day').contains('14').click();
-
-    // Assert that the selected date is displayed in the input field
-    // cy.get('.datepicker-input').should('have.value', '04/14/2023');
-        cy.get('#cancelAcademic').click()
-        cy.wait(1500)
-
-        //Logout
-        cy.get('[aria-label="My Account"]').click()
-        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        cy.get('.MuiButton-outlined').click()
-    })
 }) 
-//trigger

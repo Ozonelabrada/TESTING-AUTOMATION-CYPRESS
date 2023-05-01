@@ -77,7 +77,7 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
     })
     
-    it('Update personal Info', ()=>{
+    it.only('Update personal Info', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
