@@ -30,28 +30,17 @@ describe('Home to login page.', ()=>{
         cy.get('.css-1i27l4i > .MuiBox-root > .MuiButtonBase-root').click()
         cy.get('input[type=file]')
         .attachFile( prName , { subjectType: 'drag-n-drop' });
-        // cy.get("[id='demo-simple-select']").click()
-        // cy.get("[data-value='2017-2018']").click()
-        // cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
         cy.get('.MuiButton-textPrimary').click()
         //Student Evaluation
         cy.get('[data-testid="MuiDataTableBodyCell-3-1"]').click()
         cy.get('[data-testid="MuiDataTableBodyCell-2-3"]').click()
-        cy.get('.css-gqos7x').scrollTo('bottomRight', {duration: 1000})
-        cy.get('.css-gqos7x').scrollTo('topRight', {duration: 500})
-        cy.get('.MuiTableContainer-root').scrollTo('right', {duration:1000})
-        cy.get('.MuiTableContainer-root').scrollTo('left', {duration:500})
-        cy.get('#cancelschoolInfoDetail').click()
-        // cy.get('[data-testid="MuiDataTableBodyCell-8-0"]').click()
-        // cy.get('#addDelete').click()
-        // cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
         cy.wait(1500)
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
-    it('View Students', ()=>{
+    it('View Students', ()=>{   
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolUserName)
@@ -72,8 +61,7 @@ describe('Home to login page.', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
-    
-    it('Update personal Info', ()=>{
+    it.only('Update personal Info', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolUserName)
@@ -85,10 +73,14 @@ describe('Home to login page.', ()=>{
         //update user info
         cy.get('#editButton').click()
         cy.get('.css-126xj0f > .MuiDialog-container > .MuiPaper-elevation24 > .MuiDialogContent-root').clear()
-        cy.get('.css-126xj0f > .MuiDialog-container > .MuiPaper-elevation24 > .MuiDialogContent-root').type('Jorge updated')
-        cy.get('.css-126xj0f > .MuiDialog-container > .MuiPaper-elevation24 > .MuiDialogActions-root > .MuiButton-contained').click()
-        // cy.get(':nth-child(2) > :nth-child(2) > .MuiChip-root > .MuiChip-label').clear()
-        // cy.get(':nth-child(2) > :nth-child(2) > .MuiChip-root > .MuiChip-label').type('last name updated')
+        cy.get('.css-126xj0f > .MuiDialog-container > .MuiPaper-elevation24 > .MuiDialogContent-root').type('FirstName')
+        cy.get('#middleName').clear()
+        cy.get('#middleName').type('middle name')
+        cy.get('#lastName').clear()
+        cy.get('#lastName').type('lastname')
+        cy.get('#designation').clear()
+        cy.get('#designation').type('Api Automation')
+        cy.get('#updateEditProfile').click()
         cy.wait(3000)
         //Logout
         cy.get('[aria-label="My Account"]').click()
