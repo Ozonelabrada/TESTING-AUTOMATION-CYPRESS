@@ -26,7 +26,7 @@ describe('EDCS Brave Testing Environment!', ()=>{
         // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         // cy.get('.MuiButton-outlined').click()
     })
-    it.only('Upload Promotional Report and Student Evaluation', ()=>{
+    it('Upload Promotional Report and Student Evaluation', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
