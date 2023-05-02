@@ -4,7 +4,8 @@
 
 
 let userToken = '';
-let baseUrl = 'https://brave-sea-07bed7310.3.azurestaticapps.net';
+// let baseUrl = 'https://brave-sea-07bed7310.3.azurestaticapps.net';
+let baseUrl = 'https://brave-sea-07bed7310-157.centralus.3.azurestaticapps.net';
 let SchoolAdminName = "ozone.SAdmin"
 let SchoolAdminPass = "triple081"
 let prName = '2023-001_FORMAT_PR_TEMPLATE_2023.xlsx'
@@ -25,13 +26,13 @@ describe('EDCS Brave Testing Environment!', ()=>{
         // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         // cy.get('.MuiButton-outlined').click()
     })
-    it('Upload Promotional Report and Student Evaluation', ()=>{
+    it.only('Upload Promotional Report and Student Evaluation', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
-        //test upload PR
+        //upload PR
         cy.get("[data-testid='SummarizeRoundedIcon']").click()
         cy.get('.css-1i27l4i > .MuiBox-root > .MuiButtonBase-root').click()
         cy.get('input[type=file]')
@@ -41,14 +42,6 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.wait(10000)
         //Student Evaluation
         cy.get('[data-testid="MuiDataTableBodyCell-3-1"]').click()
-        cy.get('.css-gqos7x').scrollTo('bottomRight', {duration: 1000})
-        cy.get('.css-gqos7x').scrollTo('topRight', {duration: 1000})
-        cy.get('.MuiTableContainer-root').scrollTo('right', {duration:1000})
-        cy.get('.MuiTableContainer-root').scrollTo('left', {duration:1000})
-        cy.get('#cancelschoolInfoDetail').click()
-        // cy.get('[data-testid="MuiDataTableBodyCell-8-0"]').click()
-        // cy.get('#addDelete').click()
-        // cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
         cy.wait(1500)
         //Logout
         cy.get('[aria-label="My Account"]').click()
@@ -77,12 +70,13 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
     })
     
-    it.only('Update personal Info', ()=>{
+    it('Update personal Info', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
+        cy.wait(2000)
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
@@ -175,7 +169,9 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
         
     })
-
+    it('Settings',()=>{
+        
+    })
     it('User Testing', ()=>{
         //login
         cy.visit(baseUrl)
@@ -188,13 +184,15 @@ describe('EDCS Brave Testing Environment!', ()=>{
         //Users
         cy.get('.MuiTabs-flexContainer > :nth-child(4)').click()
         //edit user info
-        cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"] > [data-testid="EditRoundedIcon"] > path').click()
-        cy.get('.MuiButton-contained > .MuiBox-root').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-7-1"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"]').click()
         cy.wait(1500)
-        //Logout
-        cy.get('[aria-label="My Account"]').click()
-        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        cy.get('.MuiButton-outlined').click()
+        cy.get('#editUser').click()
+        cy.wait(2000)
+        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
+        // //Logout
+        // cy.get('[aria-label="My Account"]').click()
+        // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        // cy.get('.MuiButton-outlined').click()
     })
 
     it('Academic Calendar Testing.', ()=>{
