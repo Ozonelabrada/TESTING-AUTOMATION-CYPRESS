@@ -4,7 +4,8 @@
 
 
 let userToken = '';
-let baseUrl = 'https://brave-sea-07bed7310.3.azurestaticapps.net';
+// let baseUrl = 'https://brave-sea-07bed7310.3.azurestaticapps.net';
+let baseUrl = 'https://brave-sea-07bed7310-157.centralus.3.azurestaticapps.net';
 let ChedUserName = "ozone.Rpayb"
 let ChedUserPass = "^pJ3y@Si"
 let email = 'shoonixspider@gmail.com'
@@ -109,7 +110,7 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         //HEI
         cy.get('[style="cursor: pointer; background-color: rgb(240, 195, 1); height: 33%; margin-bottom: 10px;"] > [style="cursor: pointer; padding: 30px; flex: 1 1 0%; display: flex; flex-direction: row; align-items: center; justify-content: space-between;"]').click()
         cy.get('form > .MuiFormControl-root > .MuiInputBase-root').type('di')//search HEI
-        // cy.wait(3000)
+        cy.wait(3000)
         cy.get('.css-1wg7hcp > :nth-child(1) > .MuiListItemButton-root').click()//click school    
         cy.get('.css-skb6f0 > .MuiBox-root > .MuiButtonBase-root').click()//add discipline
         cy.get('#cancelDiscipline').click()
@@ -122,11 +123,11 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get('#searchDiscipline-option-0').click()
         //search level
         cy.get('#searchLevel').click()
-        cy.wait(2000)
+        // cy.wait(2000)
         cy.get('#searchLevel-option-2').click()
         //search major
         cy.get('#searchMajor').click()
-        cy.wait(2000)
+        // cy.wait(2000)
         cy.get('#searchMajor-option-5').click()
         cy.get('#cancelProgram').click()
         // cy.scrollTo('bottom',{duration: 500})
@@ -178,7 +179,7 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         
     })
 
-    it.only('User Testing', ()=>{
+    it('User Testing', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
@@ -189,14 +190,25 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
         //Users
         cy.get('.MuiTabs-flexContainer > :nth-child(3)').click()
+        cy.get('.tss-1fz5efq-MUIDataTableToolbar-left > div > #addUser').click()//click add user
+        cy.get('.MuiBox-root > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator').click()
+        cy.get('#cancelUser').click()
         //edit user info
-        cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"] > [data-testid="EditRoundedIcon"] > path').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-7-1"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"] > [data-testid="EditRoundedIcon"] > path').click()
+        cy.get('#usereditfirstName').clear()
+        cy.get('#usereditfirstName').type('updated fname')
+        cy.get('#usereditmiddleName').clear()
+        cy.get('#usereditmiddleName').type('updated middlename')
+        cy.get('#usereditlastName').clear()
+        cy.get('#usereditlastName').type('lname updated')
+        cy.get('#usereditdesignation').clear()
+        cy.get('#usereditdesignation').type('updated designation')
         cy.get('#editUser').click()
         cy.wait(1500)
         //Logout
-    //     cy.get('[aria-label="My Account"]').click()
-    //     cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-    //     cy.get('.MuiButton-outlined').click()
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
     })
 
 }) 
