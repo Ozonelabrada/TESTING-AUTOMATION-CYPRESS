@@ -61,7 +61,7 @@ describe('Home to login page.', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
-    it.only('Update personal Info', ()=>{
+    it('Update personal Info', ()=>{
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolUserName)
@@ -87,7 +87,6 @@ describe('Home to login page.', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
-
     it('Security Testing', ()=>{
         //login
         cy.visit(baseUrl)
