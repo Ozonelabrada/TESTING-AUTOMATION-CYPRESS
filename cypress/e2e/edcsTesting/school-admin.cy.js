@@ -170,7 +170,48 @@ describe('EDCS Brave Testing Environment!', ()=>{
         
     })
     it('Settings',()=>{
+        //login
+        cy.visit(baseUrl)
+        cy.get("input[name='username']").type(SchoolAdminName)
+        cy.get("input[name='password']").type(SchoolAdminPass)
+        cy.get("[type='submit']").click()
         
+        //settings
+        cy.get(':nth-child(4) > .css-1193emu > .MuiListItemButton-root').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-2-0"]').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-3-0"] > :nth-child(2)').click()//sselect curiculum
+        cy.get('.MuiBox-root > .css-5ax1kt > :nth-child(1)').click() //add curriculum
+        cy.get('#curriculumname').type('CUR-NAME-0123')
+        cy.get('#loadingAdding').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-3-0"]').click()
+        cy.wait(2000)
+        cy.get('.MuiBox-root > .css-1yjo05o > :nth-child(1)').click()   //add course
+        cy.get('#code').type('automatio-001')
+        cy.get('#yearLevel').click()
+        cy.get('[data-value="2"]').click()
+        cy.get('#courseSemester').click()
+        cy.get('[data-value="3"]').click()
+        cy.get('#coursename').clear()
+        cy.get('#coursename').type('automation name course')
+        cy.get('#coursedescription').clear()
+        cy.get('#coursedescription').type('automation description course')
+        cy.get('#lecture').type(9)
+        cy.get('#laboratory').clear()
+        cy.get('#laboratory').type(4)
+        cy.get('#addCourse').click()
+        cy.wait(2000)
+        cy.get('[data-testid="DeleteRoundedIcon"] > path').click()
+        cy.get('#addDelete').click()
+        cy.wait(2000)
+        cy.get('#Curriculums').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-4-0"] > :nth-child(2) > .css-5ax1kt > .MuiButtonBase-root > [data-testid="DeleteRoundedIcon"]').click()
+        cy.get('#addDelete').click()
+        cy.wait(2000)
+        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click() //basck to dashboard
+        // //Logout
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
     })
     it('User Testing', ()=>{
         //login
@@ -190,9 +231,9 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.wait(2000)
         cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
         // //Logout
-        // cy.get('[aria-label="My Account"]').click()
-        // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        // cy.get('.MuiButton-outlined').click()
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
     })
 
     it('Academic Calendar Testing.', ()=>{
@@ -208,15 +249,6 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('#AcademicCalendar').click()
         cy.get('#addAcademic').click()
         cy.get('#StartofFirstSemester').click()
-        
-    // Click on the input field to open the date picker
-    // cy.get('#StartofFirstSemester').click();
-
-    // Select a date from the date picker
-    // cy.get('.datepicker-day').contains('14').click();
-
-    // Assert that the selected date is displayed in the input field
-    // cy.get('.datepicker-input').should('have.value', '04/14/2023');
         cy.get('#cancelAcademic').click()
         cy.wait(1500)
 
