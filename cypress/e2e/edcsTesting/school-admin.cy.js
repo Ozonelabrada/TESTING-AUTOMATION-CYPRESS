@@ -227,9 +227,15 @@ describe('EDCS Brave Testing Environment!', ()=>{
         //edit user info
         cy.get('[data-testid="MuiDataTableBodyCell-7-1"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"]').click()
         cy.wait(1500)
+        cy.get('#usereditfirstName').clear()
+        cy.get('#usereditfirstName').type('fname updated')
+        cy.get('#usereditmiddleName').clear()
+        cy.get('#usereditmiddleName').type('midname updated')
+        cy.get('#usereditlastName').clear()
+        cy.get('#usereditlastName').type('lname updated')
+        cy.get('#usereditdesignation').clear()
+        cy.get('#usereditdesignation').type('user designation updated')
         cy.get('#editUser').click()
-        cy.wait(2000)
-        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
         // //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
