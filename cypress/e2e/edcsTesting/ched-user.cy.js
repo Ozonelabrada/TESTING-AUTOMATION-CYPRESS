@@ -99,52 +99,66 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
-
-    it('HEI Profile', ()=>{
+    
+    it.only('HEI Profile', ()=>{
+        let schoolnSearch = 'di';
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/schools?pageSize=20&search='+schoolnSearch+'&page=1').as('loadSchool');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
         cy.get("[type='submit']").click()
-        // cy.wait(2000)
+        cy.wait('@logData')
         //HEI
         cy.get('[style="cursor: pointer; background-color: rgb(240, 195, 1); height: 33%; margin-bottom: 10px;"] > [style="cursor: pointer; padding: 30px; flex: 1 1 0%; display: flex; flex-direction: row; align-items: center; justify-content: space-between;"]').click()
-        cy.get('form > .MuiFormControl-root > .MuiInputBase-root').type('di')//search HEI
-        cy.wait(3000)
+        cy.get('form > .MuiFormControl-root > .MuiInputBase-root').type(schoolnSearch)//search HEI
+        cy.wait('@loadSchool')
         cy.get('.css-1wg7hcp > :nth-child(1) > .MuiListItemButton-root').click()//click school    
         cy.get('.css-skb6f0 > .MuiBox-root > .MuiButtonBase-root').click()//add discipline
-        cy.get('#cancelDiscipline').click()
-        // cy.wait(1000)
-        cy.get('.MuiTabs-flexContainer > :nth-child(2)').click()//select program
-        cy.get('.css-o6ekor > .MuiBox-root > .MuiButtonBase-root').click()
-        //search dicipline
-        cy.get('#searchDiscipline').click()
-        cy.wait(2000)
-        cy.get('#searchDiscipline-option-0').click()
-        //search level
-        cy.get('#searchLevel').click()
-        // cy.wait(2000)
-        cy.get('#searchLevel-option-2').click()
-        //search major
+        cy.get('#displiplinecode').type('DIS-CODE-321-TEST')
+        cy.get('#disciplinename').type('DIS-NAME-321-TEST')
+        cy.get('#addDiscipline').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-1-2"]').click()
+        cy.get('.css-o6ekor > .MuiBox-root > .MuiButtonBase-root').click()  //select program
+        cy.get('#programName').type('PRO-NAME-001')
+        cy.get(':nth-child(3) > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment').click()
+        cy.get('#searchLevel-option-3').click()
         cy.get('#searchMajor').click()
+        cy.get('#searchMajor-option-7').click()
+        cy.get('#addProgram').click()
+        // cy.get('#cancelDiscipline').click()
+        // cy.wait(1000)
+        // cy.get('.MuiTabs-flexContainer > :nth-child(2)').click()//select program
+        // cy.get('.css-o6ekor > .MuiBox-root > .MuiButtonBase-root').click()
+        //search dicipline
+        // cy.get('#searchDiscipline').click()
         // cy.wait(2000)
-        cy.get('#searchMajor-option-5').click()
-        cy.get('#cancelProgram').click()
+        // cy.get('#searchDiscipline-option-0').click()
+        //search level
+        // cy.get('#searchLevel').click()
+        // cy.wait(2000)
+        // cy.get('#searchLevel-option-2').click()
+        //search major
+        // cy.get('#searchMajor').click()
+        // cy.wait(2000)
+        // cy.get('#searchMajor-option-5').click()
+        // cy.get('#cancelProgram').click()
         // cy.scrollTo('bottom',{duration: 500})
         // cy.wait(1000)
-        cy.get('.MuiTabs-flexContainer > :nth-child(3)').click()//select curriculum
-        cy.wait(2000)
-        cy.get('.MuiTabs-flexContainer > :nth-child(4)').click()//select courses
-        cy.wait(2000)
-        cy.get('.MuiTabs-flexContainer > :nth-child(5)').click()//select downloads
-        cy.scrollTo('bottom',{duration: 1000})
-        cy.scrollTo('top',{duration: 500})
+        // cy.get('.MuiTabs-flexContainer > :nth-child(3)').click()//select curriculum
+        // cy.wait(2000)
+        // cy.get('.MuiTabs-flexContainer > :nth-child(4)').click()//select courses
+        // cy.wait(2000)
+        // cy.get('.MuiTabs-flexContainer > :nth-child(5)').click()//select downloads
+        // cy.scrollTo('bottom',{duration: 1000})
+        // cy.scrollTo('top',{duration: 500})
         // cy.wait(1000)
-        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()//back to dashboard
+        // cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()//back to dashboard
         //Logout
-        cy.get('[aria-label="My Account"]').click()
-        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        cy.get('.MuiButton-outlined').click()
+        // cy.get('[aria-label="My Account"]').click()
+        // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        // cy.get('.MuiButton-outlined').click()
         
     }) 
 
