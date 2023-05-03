@@ -13,25 +13,26 @@ let email = 'ozone.labrada@pointersbit.com'
 
 describe('EDCS Brave Testing Environment!', ()=>{
     it('Login Dashboard', ()=>{
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
-        cy.get("[type='submit']").click().should(()=>{
-
-        })
-        cy.wait(1500)
+        cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //Logout
         // cy.get('[aria-label="My Account"]').click()
         // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         // cy.get('.MuiButton-outlined').click()
     })
     it('Upload Promotional Report and Student Evaluation', ()=>{
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //upload PR
         cy.get("[data-testid='SummarizeRoundedIcon']").click()
         cy.get('.css-1i27l4i > .MuiBox-root > .MuiButtonBase-root').click()
@@ -49,11 +50,13 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
     })
     it('View Students', ()=>{
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //Students
         cy.get("[aria-label='Students']").click()
         cy.wait(1000)
@@ -71,12 +74,13 @@ describe('EDCS Brave Testing Environment!', ()=>{
     })
     
     it('Update personal Info', ()=>{
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
-        cy.wait(2000)
+        cy.wait('@logData')
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
@@ -95,11 +99,13 @@ describe('EDCS Brave Testing Environment!', ()=>{
     })
 
     it('Institutional Profile', ()=>{
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
@@ -141,11 +147,13 @@ describe('EDCS Brave Testing Environment!', ()=>{
     }) 
 
     it('Security Testing', ()=>{
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
@@ -170,11 +178,13 @@ describe('EDCS Brave Testing Environment!', ()=>{
         
     })
     it('Settings',()=>{
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         
         //settings
         cy.get(':nth-child(4) > .css-1193emu > .MuiListItemButton-root').click()
@@ -214,11 +224,13 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
     })
     it('User Testing', ()=>{
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
@@ -243,11 +255,13 @@ describe('EDCS Brave Testing Environment!', ()=>{
     })
 
     it('Academic Calendar Testing.', ()=>{
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(SchoolAdminName)
         cy.get("input[name='password']").type(SchoolAdminPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
