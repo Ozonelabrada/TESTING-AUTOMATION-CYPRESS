@@ -5,61 +5,83 @@
 
 let userToken = '';
 // let baseUrl = 'https://brave-sea-07bed7310.3.azurestaticapps.net';
-let baseUrl = 'https://brave-sea-07bed7310-157.centralus.3.azurestaticapps.net';
+let baseUrl = 'https://brave-sea-07bed7310-160.centralus.3.azurestaticapps.net/';
 let ChedUserName = "ozone.Rpayb"
 let ChedUserPass = "^pJ3y@Si"
 let email = 'shoonixspider@gmail.com'
+let interceptLogUrl = 'https://dev01-edcs-web-appsvc.azurewebsites.net/login'
+let loadAcademicCalendar = 'https://dev01-edcs-web-appsvc.azurewebsites.net/academicCalendar?regionId=6&pageSize=100&search=&direction=desc&orderBy=DateCreated'
 
 describe('CHED USER | EDCS Testing Environment!', ()=>{
+    
+    function generateRandomString(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+      }
+      let randomString = generateRandomString(5);
+
     it('Login Dashboard', ()=>{
         //login
+        cy.intercept(interceptLogUrl).as('logData');
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
-        cy.get("[type='submit']").click().should(()=>{
-
-        })
+        cy.get("[type='submit']").click()
+        cy.wait('@logData')
         cy.wait(1500)
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
-    it('Upload Promotional Report and Student Evaluation', ()=>{
+    it('Promotional Report and Student Evaluation', ()=>{
+        cy.intercept(interceptLogUrl).as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         cy.get(':nth-child(5) > .css-1193emu > .MuiListItemButton-root').click()
-        cy.wait(5000)
+        // cy.wait(5000)
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
     it('View Academic Calendar', ()=>{
+        cy.intercept(interceptLogUrl).as('logData');
+        cy.intercept(loadAcademicCalendar).as('loadAcaCalendar');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
-        cy.get("[type='submit']").click().should(()=>{
-
-        })
+        cy.get("[type='submit']").click()
+        cy.wait('@logData')
         cy.get(':nth-child(3) > .css-1193emu > .MuiListItemButton-root').click()
         cy.get('.MuiFormControl-root > .MuiInputBase-root').click()
-        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
+        cy.get("body > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > main:nth-child(3) > main:nth-child(1) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)").click()
+        cy.wait('@loadAcaCalendar')
+        cy.get('#heiacademiccalendarselectAutocomplete-112 > div').click()
+        // cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()//dashboard
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
     it('View Students', ()=>{
+        cy.intercept(interceptLogUrl).as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //Students
         cy.get("[aria-label='Students']").click()
         cy.scrollTo('bottom', {duration: 2000})
@@ -74,11 +96,13 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
     })
     
     it('Update personal Info', ()=>{
+        cy.intercept(interceptLogUrl).as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
@@ -100,9 +124,9 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
     })
     
-    it.only('HEI Profile', ()=>{
+    it('HEI Profile', ()=>{
+        cy.intercept(interceptLogUrl).as('logData');
         let schoolnSearch = 'di';
-        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
         cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/schools?pageSize=20&search='+schoolnSearch+'&page=1').as('loadSchool');
         //login
         cy.visit(baseUrl)
@@ -116,60 +140,86 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.wait('@loadSchool')
         cy.get('.css-1wg7hcp > :nth-child(1) > .MuiListItemButton-root').click()//click school    
         cy.get('.css-skb6f0 > .MuiBox-root > .MuiButtonBase-root').click()//add discipline
-        cy.get('#displiplinecode').type('DIS-CODE-321-TEST')
-        cy.get('#disciplinename').type('DIS-NAME-321-TEST')
+        cy.get('#displiplinecode').type(randomString+'-321-TEST')
+        cy.get('#disciplinename').type(randomString+'-TEST')
         cy.get('#addDiscipline').click()
         cy.get('[data-testid="MuiDataTableBodyCell-1-2"]').click()
         cy.get('.css-o6ekor > .MuiBox-root > .MuiButtonBase-root').click()  //select program
-        cy.get('#programName').type('PRO-NAME-001')
+        cy.get('#programName').type(randomString+'-PRO-NAME')
         cy.get(':nth-child(3) > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment').click()
         cy.get('#searchLevel-option-3').click()
         cy.get('#searchMajor').click()
         cy.get('#searchMajor-option-7').click()
         cy.get('#addProgram').click()
-        // cy.get('#cancelDiscipline').click()
-        // cy.wait(1000)
-        // cy.get('.MuiTabs-flexContainer > :nth-child(2)').click()//select program
-        // cy.get('.css-o6ekor > .MuiBox-root > .MuiButtonBase-root').click()
-        //search dicipline
-        // cy.get('#searchDiscipline').click()
-        // cy.wait(2000)
-        // cy.get('#searchDiscipline-option-0').click()
-        //search level
-        // cy.get('#searchLevel').click()
-        // cy.wait(2000)
-        // cy.get('#searchLevel-option-2').click()
-        //search major
-        // cy.get('#searchMajor').click()
-        // cy.wait(2000)
-        // cy.get('#searchMajor-option-5').click()
-        // cy.get('#cancelProgram').click()
-        // cy.scrollTo('bottom',{duration: 500})
-        // cy.wait(1000)
-        // cy.get('.MuiTabs-flexContainer > :nth-child(3)').click()//select curriculum
-        // cy.wait(2000)
-        // cy.get('.MuiTabs-flexContainer > :nth-child(4)').click()//select courses
-        // cy.wait(2000)
-        // cy.get('.MuiTabs-flexContainer > :nth-child(5)').click()//select downloads
-        // cy.scrollTo('bottom',{duration: 1000})
-        // cy.scrollTo('top',{duration: 500})
-        // cy.wait(1000)
-        // cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()//back to dashboard
-        //Logout
-        // cy.get('[aria-label="My Account"]').click()
-        // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        // cy.get('.MuiButton-outlined').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-8-0"] > :nth-child(2) > .css-1yjo05o > .MuiButtonBase-root > [data-testid="DeleteRoundedIcon"] > path').click()//delete program
+        cy.get('#addDelete').click()
+        cy.wait(1500)
+        cy.get('.MuiTabs-flexContainer > :nth-child(1)').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-6-2"] > :nth-child(2) > .css-1yjo05o > .MuiButtonBase-root > [data-testid="DeleteRoundedIcon"] > path').click()//delete discipline
+        cy.get('#addDelete').click()
+        cy.wait(1500)        
+        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
+        // Logout
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
         
     }) 
-
-    it('Security Testing', ()=>{
+    it('Settings', ()=>{
+        cy.intercept(interceptLogUrl).as('logData');
+        let searchHEI = 'inst'
+        cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/schools/'+searchHEI+'?regionId=6').as('logHEI')
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
         cy.get("[type='submit']").click()
+        cy.wait('@logData')
+        //Settings
+        cy.get(':nth-child(6) > .css-1193emu > .MuiListItemButton-root').click() //select settings
+        cy.get("div[class='MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6'] input[role='combobox']").click()
+        cy.get("div[class='MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-feqhe6'] input[role='combobox']").type('inst')
+        cy.get("div[role='presentation'] p:nth-child(1)").click() //select school
+        cy.get('.css-skb6f0 > .MuiBox-root > .MuiButtonBase-root').click()
+        cy.get('#searchAsYouType').type(searchHEI)
+        cy.wait('@logHEI')
+        cy.get('#settingschoolinstutional112 > div').click()
+        cy.get('#displiplinecode').type('aaa'+randomString+'-TEST-001')
+        cy.get('#disciplinename').type('aaa'+randomString+'-NAME-001')
+        cy.get('#addDiscipline').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-1-0"]').click()
+        cy.get('.css-o6ekor > .MuiBox-root > .MuiButtonBase-root').click()
+        cy.get('#programName').type('aaa'+randomString+'-PRO-NAME-001')
+        cy.get('#searchLevel').click()
+        cy.get('#searchLevel-option-2').click()
+        cy.get('#searchMajor').click()
+        cy.get('#searchMajor-option-6').click()
+        cy.get('#addProgram').click()
+        cy.wait(2000)
+        cy.get('[data-testid="MuiDataTableBodyCell-8-0"] > :nth-child(2) > .css-1yjo05o > .MuiButtonBase-root').click()
+        cy.wait(2000)
+        cy.get('#addDelete').click()
+        cy.get('#Disciplines').click()
+        cy.wait(2000)
+        cy.get('[data-testid="MuiDataTableBodyCell-6-0"] > :nth-child(2) > .css-1yjo05o > .MuiButtonBase-root > [data-testid="DeleteRoundedIcon"] > path').click()
+        cy.get('#addDelete').click()
+        cy.wait(1500)
+        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
+        //Logout
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
+        
+    })
+    it('Security Testing', ()=>{
+        cy.intercept(interceptLogUrl).as('logData');
+        //login
+        cy.visit(baseUrl)
+        cy.get("input[name='username']").type(ChedUserName)
+        cy.get("input[name='password']").type(ChedUserPass)
+        cy.get("[type='submit']").click()
+        cy.wait('@logData')
         //My profile
-        // cy.wait()
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
         //security
@@ -194,11 +244,13 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
     })
 
     it('User Testing', ()=>{
+        cy.intercept(interceptLogUrl).as('logData');
         //login
         cy.visit(baseUrl)
         cy.get("input[name='username']").type(ChedUserName)
         cy.get("input[name='password']").type(ChedUserPass)
         cy.get('.MuiButton-contained').click()
+        cy.wait('@logData')
         //My profile
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
@@ -209,6 +261,7 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get('#cancelUser').click()
         //edit user info
         cy.get('[data-testid="MuiDataTableBodyCell-7-1"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"] > [data-testid="EditRoundedIcon"] > path').click()
+        cy.wait(1500)
         cy.get('#usereditfirstName').clear()
         cy.get('#usereditfirstName').type('updated fname')
         cy.get('#usereditmiddleName').clear()
