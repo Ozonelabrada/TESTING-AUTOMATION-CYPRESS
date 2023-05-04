@@ -39,6 +39,7 @@ describe('CHED USER | EDCS Testing Environment!', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
     })
+    //well check for delete and lock PR 
     it('Promotional Report and Student Evaluation', ()=>{
         cy.intercept(interceptLogUrl).as('logData');
         //login
