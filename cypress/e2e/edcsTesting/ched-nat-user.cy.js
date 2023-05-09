@@ -139,9 +139,18 @@ describe('CHED Regional ADMIN | EDCS DEV Environment!', ()=>{
         cy.get('#superadmindashboardschoolyear').type('region v')
         cy.get("li[id='seregionselevtntting6'] div").click()
         cy.get('form > .MuiFormControl-root > .MuiInputBase-root').type(schoolnSearch) //search HEI
-        cy.get('.MuiTypography-body2 > :nth-child(1) > div > :nth-child(1)').click()
+        cy.get('#hie-0 > .MuiListItemButton-root').click()
+        cy.wait(1500)
+        cy.get('.MuiTabs-flexContainer > :nth-child(2)').click()
+        cy.wait(1500)
+        cy.get('.MuiTabs-flexContainer > :nth-child(3)').click()
+        cy.wait(1500)
+        cy.get('.MuiTabs-flexContainer > :nth-child(4)').click()
+        cy.wait(1500)
+        cy.get('.MuiTabs-flexContainer > :nth-child(5)').click()
         //dashboard
         cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
+        cy.wait(1500)
         // Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
