@@ -154,11 +154,13 @@ describe('Regional USER | EDCS Dev Environment!', ()=>{
         cy.get('#addDelete').click()
         cy.wait(1500)
         cy.get('.MuiTabs-flexContainer > :nth-child(1)').click()
-        cy.get('[data-testid="MuiDataTableBodyCell-6-2"] > :nth-child(2) > .css-1yjo05o > .MuiButtonBase-root > [data-testid="DeleteRoundedIcon"] > path').click()//delete discipline
+        cy.wait(2000)    
+        cy.get('[data-testid="MuiDataTableBodyCell-6-0"] > :nth-child(2) > .css-1yjo05o > .MuiButtonBase-root > [data-testid="DeleteRoundedIcon"] > path').click()
         cy.get('#addDelete').click()
         cy.wait(1500)        
         cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
-        // Logout
+        cy.wait(1500)        
+        // // Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
