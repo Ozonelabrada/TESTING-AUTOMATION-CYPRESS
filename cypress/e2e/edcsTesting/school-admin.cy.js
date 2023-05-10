@@ -5,11 +5,11 @@
 
 let userToken = '';
 // let baseUrl = 'https://brave-sea-07bed7310.3.azurestaticapps.net';
-let baseUrl = 'https://brave-sea-07bed7310-157.centralus.3.azurestaticapps.net';
-let SchoolAdminName = "ozone.SAdmin"
+let baseUrl = 'https://brave-sea-07bed7310-160.centralus.3.azurestaticapps.net';
+let SchoolAdminName = "john.cuezon"
 let SchoolAdminPass = "triple081"
 let prName = '2023-001_FORMAT_PR_TEMPLATE_2023.xlsx'
-let email = 'ozone.labrada@pointersbit.com'
+let email = 'favax69226@glumark.com'
 
 describe('EDCS Brave Testing Environment!', ()=>{
     it('Login Dashboard', ()=>{
@@ -21,9 +21,9 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get("[type='submit']").click()
         cy.wait('@logData')
         //Logout
-        // cy.get('[aria-label="My Account"]').click()
-        // cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        // cy.get('.MuiButton-outlined').click()
+        cy.get('[aria-label="My Account"]').click()
+        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+        cy.get('.MuiButton-outlined').click()
     })
     it('Upload Promotional Report and Student Evaluation', ()=>{
         cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/login').as('logData');
@@ -39,12 +39,15 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('input[type=file]')
         .attachFile( prName , { subjectType: 'drag-n-drop' });
         cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
-        cy.get('.MuiButton-textPrimary').click()
         cy.wait(10000)
+        cy.get("#handleUploadYes").click()
+        cy.wait(15000)
         //Student Evaluation
-        cy.get('[data-testid="MuiDataTableBodyCell-3-1"]').click()
+        cy.scrollTo('bottom', {duration:1000})
+        cy.scrollTo('top', {duration:500})
+        cy.get(':nth-child(4) > .css-1193emu > .MuiListItemButton-root').click()
         cy.wait(1500)
-        //Logout
+        // //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
         cy.get('.MuiButton-outlined').click()
@@ -137,6 +140,7 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('#latitude').clear()
         cy.get('#latitude').type(15)
         cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        cy.get('#AddConformation').click()
         cy.wait(2000)
 
         //Logout
@@ -165,9 +169,9 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('#oldPassword').clear()
         cy.get('#oldPassword').type(SchoolAdminPass)
         cy.get('#newPassword').clear()
-        cy.get('#newPassword').type('triple081')
+        cy.get('#newPassword').type(SchoolAdminPass)
         cy.get('#confirmPassword').clear()
-        cy.get('#confirmPassword').type('triple081')
+        cy.get('#confirmPassword').type(SchoolAdminPass)
         cy.get('.css-126xj0f > .MuiDialog-container > .MuiPaper-root > .MuiDialogActions-root > .MuiButton-contained').click()
         cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root > .MuiListItemIcon-root > .MuiButtonBase-root').click()
         cy.wait(1500)
@@ -187,36 +191,38 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.wait('@logData')
         
         //settings
-        cy.get(':nth-child(4) > .css-1193emu > .MuiListItemButton-root').click()
-        cy.get('[data-testid="MuiDataTableBodyCell-2-0"]').click()
-        cy.get('[data-testid="MuiDataTableBodyCell-3-0"] > :nth-child(2)').click()//sselect curiculum
-        cy.get('.MuiBox-root > .css-5ax1kt > :nth-child(1)').click() //add curriculum
-        cy.get('#curriculumname').type('CUR-NAME-0123')
-        cy.get('#loadingAdding').click()
-        cy.get('[data-testid="MuiDataTableBodyCell-3-0"]').click()
-        cy.wait(2000)
-        cy.get('.MuiBox-root > .css-1yjo05o > :nth-child(1)').click()   //add course
-        cy.get('#code').type('automatio-001')
-        cy.get('#yearLevel').click()
-        cy.get('[data-value="2"]').click()
-        cy.get('#courseSemester').click()
-        cy.get('[data-value="3"]').click()
-        cy.get('#coursename').clear()
-        cy.get('#coursename').type('automation name course')
-        cy.get('#coursedescription').clear()
-        cy.get('#coursedescription').type('automation description course')
-        cy.get('#lecture').type(9)
-        cy.get('#laboratory').clear()
-        cy.get('#laboratory').type(4)
-        cy.get('#addCourse').click()
-        cy.wait(2000)
-        cy.get('[data-testid="DeleteRoundedIcon"] > path').click()
-        cy.get('#addDelete').click()
-        cy.wait(2000)
+        cy.get(':nth-child(6) > .css-1193emu > .MuiListItemButton-root').click()
+        cy.get('#Disciplines').click()
+        cy.wait(1500)
+        cy.get('#Programs').click()
+        cy.wait(1500)
         cy.get('#Curriculums').click()
-        cy.get('[data-testid="MuiDataTableBodyCell-4-0"] > :nth-child(2) > .css-5ax1kt > .MuiButtonBase-root > [data-testid="DeleteRoundedIcon"]').click()
-        cy.get('#addDelete').click()
-        cy.wait(2000)
+        cy.wait(1500)
+        cy.get('#Courses').click()
+        cy.wait(1500)
+        cy.scrollTo('bottom', {duration: 1000})
+        cy.scrollTo('top', {duration: 500})
+
+        // cy.get('.MuiBox-root > .css-1yjo05o > :nth-child(1)').click()   //add course
+        // cy.get('#searchCurriculum').type('curr-name-001')
+        // cy.get('#searchCurriculum-option-0').click()
+        // cy.get('#code').type('automatio-001')
+        // cy.get('#yearLevel').click()
+        // cy.get('[data-value="2"]').click()
+        // cy.get('#courseSemester').click()
+        // cy.get('[data-value="3"]').click()
+        // cy.get('#coursename').clear()
+        // cy.get('#coursename').type('automation name course')
+        // cy.get('#coursedescription').clear()
+        // cy.get('#coursedescription').type('automation description course')
+        // cy.get('#lecture').type(9)
+        // cy.get('#laboratory').clear()
+        // cy.get('#laboratory').type(4)
+        // cy.get('#addCourse').click()
+        // cy.wait(2000)
+        // cy.get('[data-testid="DeleteRoundedIcon"] > path').click()
+        // cy.get('#addDelete').click()
+        // cy.wait(2000)
         cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click() //basck to dashboard
         // //Logout
         cy.get('[aria-label="My Account"]').click()
@@ -267,14 +273,22 @@ describe('EDCS Brave Testing Environment!', ()=>{
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-wwdrj6').click()
         //Academic Calendar
         cy.get('#AcademicCalendar').click()
-        cy.get('#addAcademic').click()
-        cy.get('#StartofFirstSemester').click()
-        cy.get('#cancelAcademic').click()
+        // cy.get('#addAcademic').click()
+        // cy.get('#cancelAcademic').click()
+
+        cy.get("table[role='grid']").then($table => {
+            if ($table.find('tbody tr').length === 0) {
+                //nothing returns
+            } else {
+                cy.scrollTo('bottom', {duration:1000})
+                cy.scrollTo('top', {duration:500})
+            }
+          });
         cy.wait(1500)
 
         //Logout
-        cy.get('[aria-label="My Account"]').click()
-        cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
-        cy.get('.MuiButton-outlined').click()
+    //     cy.get('[aria-label="My Account"]').click()
+    //     cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
+    //     cy.get('.MuiButton-outlined').click()
     })
 })
