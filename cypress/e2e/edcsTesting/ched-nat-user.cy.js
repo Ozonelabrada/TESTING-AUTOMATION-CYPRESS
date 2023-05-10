@@ -11,7 +11,7 @@ let email = 'lilik44379@saeoil.com'
 let interceptLogUrl = 'https://dev01-edcs-web-appsvc.azurewebsites.net/login'
 let loadAcademicCalendar = 'https://dev01-edcs-web-appsvc.azurewebsites.net/academicCalendar?regionId=6&pageSize=100&search=&direction=desc&orderBy=DateCreated'
 
-describe('CHED Regional ADMIN | EDCS DEV Environment!', ()=>{
+describe('CHED National User | EDCS DEV Environment!', ()=>{
     
     function generateRandomString(length) {
         let result = '';
@@ -123,7 +123,7 @@ describe('CHED Regional ADMIN | EDCS DEV Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
     })
     //this
-    it.only('HEI Profile', ()=>{
+    it('HEI Profile', ()=>{
         cy.intercept(interceptLogUrl).as('logData');
         let schoolnSearch = 'digong';
         cy.intercept('https://dev01-edcs-web-appsvc.azurewebsites.net/schools?pageSize=20&search='+schoolnSearch+'&page=1').as('loadSchool');
@@ -157,7 +157,6 @@ describe('CHED Regional ADMIN | EDCS DEV Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
         
     }) 
-    //yhis
     it('Settings', ()=>{
         cy.intercept(interceptLogUrl).as('logData');
         let searchHEI = 'digo'
@@ -180,7 +179,7 @@ describe('CHED Regional ADMIN | EDCS DEV Environment!', ()=>{
         cy.get('#displiplinecode').type('aaa'+randomString+'-TEST-001')
         cy.get('#disciplinename').type('aaa'+randomString+'-NAME-001')
         cy.get('#addDiscipline').click()
-        cy.get('[data-testid="MuiDataTableBodyCell-1-0"]').click()
+        cy.get('[data-testid="MuiDataTableBodyCell-1-0"]').click()  
         cy.get('.css-o6ekor > .MuiBox-root > .MuiButtonBase-root').click()
         cy.get('#programName').type('aaa'+randomString+'-PRO-NAME-001')
         cy.get('#searchLevel').click()
@@ -238,7 +237,7 @@ describe('CHED Regional ADMIN | EDCS DEV Environment!', ()=>{
         cy.get('.MuiButton-outlined').click()
         
     })
-    //this
+    //to follow
     it('User', ()=>{
         cy.intercept(interceptLogUrl).as('logData');
         //login
@@ -254,6 +253,8 @@ describe('CHED Regional ADMIN | EDCS DEV Environment!', ()=>{
         cy.get('.MuiTabs-flexContainer > :nth-child(3)').click()
         // Regional 
         cy.get('.tss-1fz5efq-MUIDataTableToolbar-left > div > #addUser').click()//click add user
+        cy.get('#regionId').click()
+        cy.get('[data-value="6"]').click()
         cy.get('#firstName').type('aaa'+randomString)
         cy.get('#middleName').type('aaa'+randomString)
         cy.get('#lastName').type('aaa'+randomString)
@@ -261,61 +262,10 @@ describe('CHED Regional ADMIN | EDCS DEV Environment!', ()=>{
         cy.get('#designation').type('Tester '+randomString)
         cy.get('.MuiDialogActions-root > #addUser').click()
         cy.wait(3000)
-        //edit user info
-        cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"] > [data-testid="EditRoundedIcon"] > path').click()
-        cy.wait(1500)
-        cy.get('#usereditfirstName').clear()
-        cy.get('#usereditfirstName').type('updated fname')
-        cy.get('#usereditmiddleName').clear()
-        cy.get('#usereditmiddleName').type('updated middlename')
-        cy.get('#usereditlastName').clear()
-        cy.get('#usereditlastName').type('lname updated')
-        cy.get('#usereditdesignation').clear()
-        cy.get('#usereditdesignation').type('updated designation')
-        cy.get('#editUser').click()
-        cy.wait(3000)
         // delete user
         cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > .MuiIconButton-colorError > [data-testid="DeleteRoundedIcon"] > path').click()
         cy.get('#addDelete').click()
         cy.wait(1500)
-        //table
-        cy.get("#heiusertableautocomple").type('digo')
-        cy.get("div[role='presentation'] p:nth-child(1)").click()
-        //School
-        cy.get('.tss-1fz5efq-MUIDataTableToolbar-left > div > #addUser').click()//click add user
-        cy.get('#radio-buttons-group > :nth-child(2) > .MuiTypography-root').click()
-        cy.get('#searchAsYouType').type('dig')
-        cy.get('#settingschoolinstutional109 > div').click()
-        cy.get('#firstName').type('aaa1'+randomString)
-        cy.get('#middleName').type('aaa1'+randomString)
-        cy.get('#lastName').type('aaa1'+randomString)
-        cy.get(':nth-child(7) > .MuiInputBase-root > #email').type('aaa1'+randomString+'@sample.com')
-        cy.get('#designation').type('Tester '+randomString)
-        cy.get('.MuiDialogActions-root > #addUser').click()
-        cy.get('.MuiAlert-action > .MuiButtonBase-root').click()
-        cy.wait(2500)
-        //edit user info
-        cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"] > [data-testid="EditRoundedIcon"] > path').click()
-        cy.wait(1500)
-        cy.get('[style="margin-right: 6px; flex: 1 1 0%; display: flex;"] > .MuiInputBase-root > .MuiSelect-select').click()
-        cy.get('.MuiList-root > .Mui-selected').click()
-        cy.get('#usereditfirstName').clear()
-        cy.get('#usereditfirstName').type('updated fname')
-        cy.get('#usereditmiddleName').clear()
-        cy.get('#usereditmiddleName').type('updated middlename')
-        cy.get('#usereditlastName').clear()
-        cy.get('#usereditlastName').type('lname updated')
-        cy.get('#usereditdesignation').clear()
-        cy.get('#usereditdesignation').type('updated designation')
-        cy.get('#editUser').click()
-        cy.wait(3000)
-        cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > .MuiIconButton-colorWarning > [data-testid="BlockRoundedIcon"] > path').click()
-        cy.wait(3000)
-        // delete user
-        cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > .MuiIconButton-colorError > [data-testid="DeleteRoundedIcon"] > path').click()
-        cy.get('#addDelete').click()
-        cy.wait(1500)
-        cy.get(':nth-child(1) > .css-1193emu > .MuiListItemButton-root').click()
         //Logout
         cy.get('[aria-label="My Account"]').click()
         cy.get('#primary-search-account-menu > .MuiPaper-root > .MuiList-root > .css-1fglqq7').click()
