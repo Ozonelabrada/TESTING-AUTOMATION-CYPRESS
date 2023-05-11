@@ -265,6 +265,7 @@ describe('Regional USER | EDCS Dev Environment!', ()=>{
         cy.get(':nth-child(7) > .MuiInputBase-root > #email').type('aaa'+randomString+'@sample.com')
         cy.get('#designation').type('Tester '+randomString)
         cy.get('.MuiDialogActions-root > #addUser').click()
+        cy.wait(3000)
         
         //edit user info
         cy.get('[data-testid="MuiDataTableBodyCell-7-0"] > :nth-child(2) > .css-z1ua6u > [aria-label="Edit User"] > [data-testid="EditRoundedIcon"] > path').click()
